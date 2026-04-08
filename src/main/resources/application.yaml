@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    gateway:
+      routes:
+        - id: APIMatheus
+          uri: http://localhost:8081
+          predicates:
+            - Path=/pessoa/**
+
+        - id: APIAlex
+          uri: http://localhost:8082
+          predicates:
+            - Path=/pessoas/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
