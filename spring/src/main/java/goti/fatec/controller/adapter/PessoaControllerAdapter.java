@@ -6,30 +6,31 @@ import goti.fatec.entity.Pessoa;
 
 import java.util.UUID;
 
-public class PessoaControllerAdapter {
-    private PessoaControllerAdapter() {
-    }
+public final class PessoaControllerAdapter {
+
+    private PessoaControllerAdapter() {}
 
     public static Pessoa castRequest(PessoaRequest request) {
 
-        String id = request.id();
-
-        if (id == null || id.isBlank()) {
-            id = UUID.randomUUID().toString();
-        }
-
         return new Pessoa(
-                id,
+                gerarIdSeNecessario(request.id()),
                 request.nome(),
                 request.telefone()
         );
     }
 
     public static PessoaResponse castResponse(Pessoa pessoa) {
+
         return new PessoaResponse(
                 pessoa.id(),
                 pessoa.nome(),
                 pessoa.telefone()
         );
+    }
+
+    private static String gerarIdSeNecessario(String id) {
+        return (id == null || id.isBlank())
+                ? UUID.randomUUID().toString()
+                : id;
     }
 }
