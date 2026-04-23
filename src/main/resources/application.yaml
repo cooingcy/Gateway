@@ -1,6 +1,12 @@
 server:
   port: 8080
 
+  cors:
+    url:
+      - localhost:3000,
+      - http://localhost:3000,
+      - https://localhost:3000
+
 spring:
   cloud:
     compatibility-verifier:
